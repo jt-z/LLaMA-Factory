@@ -714,5 +714,22 @@
       "prompt": "content"
     },
     "folder": "python"
-  }
+  },
+    "deepseek_r1_distill": {
+    "file_name": "toy.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  }, 
+  "news_train": {
+    "file_name": "data_news_300/train.json",
+    "formatting": "sharegpt"
+  },
+  "news_eval": {
+    "file_name": "data_news_300/eval.json", 
+    "formatting": "sharegpt"
+  }  
+
 }
