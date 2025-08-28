@@ -1,0 +1,41 @@
+# 从233机器的 epoch 20的checkpoint 恢复训练，使用232机器训练，接着训练到epoch50
+
+# 单机N卡训练配置(按需修改)
+model_name_or_path: /home/ksa/dev/train_deepseek_r1_1.5B/DeepSeek-R1-Distill-Qwen-1.5B
+
+stage: sft
+do_train: true
+finetuning_type: lora  # lora
+lora_rank: 8
+lora_target: all
+
+# deepspeed: examples/deepspeed/ds_z3_config.json
+
+# 关键改动：指定旧机器的LoRA权重路径，确保这个路径指向你之前训练好的LoRA模型权重文件夹 
+resume_from_checkpoint: /home/ksa/dev/train_deepseek_r1_1.5B/Node233_DeepSeek-R1-Distill-Qwen-1.5B_train_Full_LoRA_Finetune_output_3060_gpu/checkpoint-170
+
+dataset: news_train
+template: qwen
+cutoff_len: 2048
+max_samples: 5000
+overwrite_cache: true
+preprocessing_num_workers: 8 # 
+
+output_dir: /home/ksa/dev/train_deepseek_r1_1.5B/Node232_DeepSeek-R1-Distill-Qwen-1.5B_train_full_LoRA_Finetune_output_3060_gpu_continue_output
+logging_steps: 10
+save_steps: 500
+overwrite_output_dir: true # 覆盖output输出目录
+
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-4
+num_train_epochs: 30.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 1800
+
+val_size: 0.1
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 500
