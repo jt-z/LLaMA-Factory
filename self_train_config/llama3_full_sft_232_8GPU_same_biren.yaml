@@ -7,7 +7,7 @@ stage: sft
 do_train: true
 finetuning_type: full
 # 强制禁用 Flash Attention 2 以对齐壁仞的 Vanilla Attention 表现
-flash_attn: disabled 
+# flash_attn: disabled  框架默认就是开启 Flash Attention 2 加速的。
 deepspeed: examples/deepspeed/ds_z3_config.json
 
 ### dataset
