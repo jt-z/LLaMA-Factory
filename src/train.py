@@ -14,6 +14,15 @@
 
 from llamafactory.train.tuner import run_exp
 
+# 之前调试，强制让3090用默认的 Vanilla模式的后端进行 Attention 机制 不分的计算，为了和国产卡进行调试对比的。
+# import torch
+
+# # 强制禁用 PyTorch SDPA 的加速后端
+# torch.backends.cuda.enable_flash_sdp(False)
+# torch.backends.cuda.enable_mem_efficient_sdp(False)
+# torch.backends.cuda.enable_math_sdp(True) # 明确只允许 Math 后端
+
+# print("🔥 [Debug] 强制禁用 Flash/MemEff 后端，已切换至 Math/Vanilla 模式")
 
 def main():
     run_exp()
