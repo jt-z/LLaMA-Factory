@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+cache
+
 # Distribution / packaging
 .Python
 build/
@@ -181,3 +183,4 @@ wandb/
 swanlog/
 generated_predictions.jsonl
 predictions_score.json
+ai_notes/
